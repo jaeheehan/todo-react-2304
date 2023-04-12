@@ -1,8 +1,9 @@
 import TodoItem from "./TodoItem";
+import styles from '../Todo.module.css'
 
 const TodoList = ()=> {
     return (
-        <div>
+        <div className={styles.list}>
             <TodoItem/>
             <TodoItem/>
             <TodoItem/>
