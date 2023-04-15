@@ -2,18 +2,25 @@ import TodoItem from "./TodoItem";
 import styles from '../Todo.module.css'
 import { useContext } from "react";
 import TodoContext from "../contexts/todo";
+import {Todo} from "../App";
 
-const TodoList = () => {
+interface Props {
+    readonly todos: Todo[];
+    readonly onRemove: (id: number)=> void;
+    readonly onToggle: (id: number) => void;
+}
 
-    const { state, actions } = useContext(TodoContext)
+const TodoList = ({todos, onRemove, onToggle}: Props ) => {
+
+    //const { state, actions } = useContext(TodoContext)
     return (
         <div className={styles.list}>
-            {state.todos.map((todo)=>(
+            {todos.map((todo)=>(
                 <TodoItem
                     todo={todo}
                     key={todo.id}
-                    onRemove={actions.onRemove}
-                    onToggle={actions.onToggle}/>
+                    onRemove={onRemove}
+                    onToggle={onToggle}/>
             ))}
         </div>
     )
