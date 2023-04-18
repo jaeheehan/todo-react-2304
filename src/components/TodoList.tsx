@@ -5,7 +5,7 @@ import TodoContext from "../contexts/todo";
 import {Todo} from "../App";
 
 interface Props {
-    readonly todos: Todo[];
+    readonly todos?: Todo[];
     readonly onRemove: (id: number)=> void;
     readonly onToggle: (id: number) => void;
 }
@@ -15,7 +15,7 @@ const TodoList = ({todos, onRemove, onToggle}: Props ) => {
     //const { state, actions } = useContext(TodoContext)
     return (
         <div className={styles.list}>
-            {todos.map((todo)=>(
+            {todos && todos.map((todo)=>(
                 <TodoItem
                     todo={todo}
                     key={todo.id}
