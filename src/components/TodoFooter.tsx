@@ -1,6 +1,8 @@
 import styles from '../Todo.module.css'
 import { useContext } from "react";
 import TodoContext from "../contexts/todo";
+import { useSelector } from "react-redux";
+import { TodoState } from '../modules/todos'
 
 interface Props {
     readonly onClearAll: () => void;
@@ -8,10 +10,24 @@ interface Props {
 
 const TodoFooter = ({onClearAll}: Props) => {
 
-    //const { actions } = useContext(TodoContext)
+    const { todos, nextTodoId } = useSelector((state: TodoState) => ({
+        todos: state.todos,
+        nextTodoId: state.nextTodoId
+    }));
+
+    const data = {
+        todos,
+        nextTodoId
+    };
+
+    const onSave = () => {
+        localStorage.setItem('todo-app-data', JSON.stringify(data))
+    }
+
     return (
         <div className={styles.footer}>
             <button onClick={onClearAll}>모두삭제</button>
+            <button onClick={onSave}>저장</button>
         </div>
     )
 }
