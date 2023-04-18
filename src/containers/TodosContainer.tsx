@@ -1,4 +1,4 @@
-import React from "react"
+import React, {useCallback} from "react"
 import { connect } from 'react-redux'
 import {
     changeTodoInput,
@@ -11,49 +11,36 @@ import {
 import Todos from '../components/Todos'
 import {TodoState} from "../modules/todos";
 import {Todo} from "../App";
+import { useSelector, useDispatch } from "react-redux";
 
-interface Props {
-    readonly input: string;
-    readonly todos: Todo[];
-    readonly removeTodo: (id: number) => void;
-    readonly toggleTodoStatus: (id: number) => void;
-    readonly clearAllTodos: () => void;
-    readonly addTodo: (input: string) => void;
-    readonly changeTodoInput: (input: string) => void;
-}
+const TodosContainer = () => {
 
-const TodosContainer = ({
-    input,
-    todos,
-    changeTodoInput,
-    addTodo,
-    toggleTodoStatus,
-    removeTodo,
-    clearAllTodos
-}:Props)=> {
+    const { input, todos } = useSelector((state: TodoState) => ({
+        input: state.input,
+        todos: state.todos,
+    }));
+
+    const dispatch = useDispatch();
+
+    const onChangeInput = useCallback((input: string)=> dispatch(changeTodoInput(input)), [dispatch])
+    const onInsert = useCallback((input: string)=> dispatch(addTodo(input)), [dispatch])
+    const onToggle = useCallback((id: number) => dispatch(toggleTodoStatus(id)), [dispatch])
+    const onRemove = useCallback((id: number)=> dispatch(removeTodo(id)), [dispatch])
+    const onClearAll = useCallback(()=>dispatch(clearAllTodos()), [dispatch])
+
     return (
         <Todos
             input={input}
             todos={todos}
-            onChangeInput={changeTodoInput}
-            onInsert={addTodo}
-            onToggle={toggleTodoStatus}
-            onRemove={removeTodo}
-            onClearAll={clearAllTodos}
+            onRemove={onRemove}
+            onToggle={onToggle}
+            onClearAll={onClearAll}
+            onInsert={onInsert}
+            onChangeInput={onChangeInput}
         />
-    )
-}
+    );
+};
 
-export default connect(
-    (state: TodoState)=>({
-        input: state.input,
-        todos: state.todos,
-    }),
-    {
-        changeTodoInput,
-        addTodo,
-        toggleTodoStatus,
-        removeTodo,
-        clearAllTodos
-    }
-)(TodosContainer)
+export default TodosContainer;
+
+
