@@ -6,7 +6,7 @@ import {
     toggleTodoStatus,
     removeTodo,
     clearAllTodos,
-    changeFilter,
+    changeFilter, editTodo,
 } from "../modules/todos";
 
 import Todos from '../components/Todos'
@@ -31,6 +31,7 @@ const TodosContainer = () => {
     const onRemove = useCallback((id: number)=> dispatch(removeTodo(id)), [dispatch])
     const onClearAll = useCallback(()=>dispatch(clearAllTodos()), [dispatch])
     const onChangeFilter = useCallback((filter: string) => dispatch(changeFilter(filter)), [dispatch])
+    const onEdit = useCallback((id: number, input: string) => dispatch(editTodo(id, input)), [dispatch])
 
     return (
         <Todos
@@ -43,6 +44,7 @@ const TodosContainer = () => {
             filter={filter}
             onChangeFilter={onChangeFilter}
             onChangeInput={onChangeInput}
+            onEdit = {onEdit}
         />
     );
 };

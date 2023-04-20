@@ -17,17 +17,18 @@ interface Props {
     readonly onChangeInput: (input: string) => void;
     readonly filter: string;
     readonly onChangeFilter: (filter: string) => void;
+    readonly onEdit: (id: number, input: string) => void;
 }
 
 const Todos = ({
-    input, todos, onChangeInput, onInsert, onToggle, onRemove, onClearAll, filter, onChangeFilter
+    input, todos, onChangeInput, onInsert, onToggle, onRemove, onClearAll, filter, onChangeFilter, onEdit
                }: Props) => {
     return (
         <TodoProvider>
             <TodoHeader/>
             <TodoInput input={input} onInsert={onInsert} onChangeInput={onChangeInput}/>
             <TodoFilter filter={filter} onChangeFilter={onChangeFilter}/>
-            <TodoList todos={todos} onRemove={onRemove} onToggle={onToggle}/>
+            <TodoList todos={todos} onRemove={onRemove} onToggle={onToggle} onEdit={onEdit}/>
             <TodoFooter onClearAll={onClearAll}/>
         </TodoProvider>
     )
