@@ -6,14 +6,15 @@ import {
     toggleTodoStatus,
     removeTodo,
     clearAllTodos,
-    changeFilter, editTodo,
-} from "../modules/todos";
+    changeFilter,
+    editTodo,
+} from "../actions/todos";
 
 import Todos from '../components/Todos'
-import {TodoState} from "../modules/todos";
+import {TodoState} from "../reducers/todos";
 
 import { useSelector, useDispatch } from "react-redux";
-import { getFilteredTodos } from "../modules/selector";
+import { getFilteredTodos } from "../selectors/todos";
 
 const TodosContainer = () => {
 

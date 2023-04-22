@@ -1,7 +1,8 @@
 import styles from '../Todo.module.css'
 import { Todo } from '../App'
 import React, {useState, useEffect, useCallback} from "react";
-import {resetEditingId, setEditingId, TodoState} from "../modules/todos";
+import {resetEditingId, setEditingId} from "../actions/todos";
+import { TodoState } from "../reducers/todos";
 import {useDispatch, useSelector} from "react-redux";
 
 interface Props {

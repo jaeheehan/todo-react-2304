@@ -3,14 +3,17 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { createStore } from "redux";
+//import { createStore } from "redux";
 import { Provider } from "react-redux";
-import todos from './modules/todos'
-import { composeWithDevTools } from "redux-devtools-extension";
+import todos from './reducers/todos'
+//import { composeWithDevTools } from "redux-devtools-extension";
 
-import { restore } from "./modules/todos"
+import { restore } from "./actions/todos"
 
-const store = createStore(todos, composeWithDevTools());
+import configureStore from './store';
+//const store = createStore(todos, composeWithDevTools());
+
+const store = configureStore(todos);
 
 function loadData() {
     try{
